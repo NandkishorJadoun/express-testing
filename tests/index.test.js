@@ -26,4 +26,26 @@ test("testing routes works", (done) => {
 
 // testing db operations
 
-/* test("") */
+test("getting data from db works", (done) => {
+  request(app)
+    .get("/user/jana@email.com")
+    .expect("Content-Type", /json/)
+    .expect({
+      user: {
+        id: "12e03de4-2f81-41d8-a960-3cf4138356a8",
+        email: "jana@email.com",
+        name: "Jana",
+      },
+    })
+    .expect(200, done);
+});
+
+test("return null if no user found", (done) => {
+  request(app)
+    .get("/user/null@email.com")
+    .expect("Content-Type", /json/)
+    .expect({
+      user: null,
+    })
+    .expect(200, done);
+});

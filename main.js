@@ -1,8 +1,13 @@
 const prisma = require("./configs/prisma");
 
 async function main() {
-  const users = await prisma.user.findMany();
-  console.log("User Array:", users);
+  const users = await prisma.user.create({
+    data: {
+      name: "Jana",
+      email: "jana@email.com",
+    },
+  });
+  console.log("data", users);
 }
 
 main();
