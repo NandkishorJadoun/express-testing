@@ -1,7 +1,10 @@
 const app = require("../app");
 const request = require("supertest");
+const prisma = require("../configs/prisma");
 
 // testing routes & controllers
+
+afterAll(async () => await prisma.$disconnect());
 
 test("index route works", (done) => {
   request(app)
